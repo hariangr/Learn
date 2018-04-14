@@ -1,0 +1,19 @@
+{
+  "name": "ReactExpressTemplate",
+  "version": "1.0.0",
+  "description": "this is a basic template that hariangr use for React frontend and Express backend",
+  "main": "server.js",
+  "scripts": {
+    "nodemon": "nodemon server.js"
+  },
+  "repository": "https://github.com/hariangr/Learn",
+  "author": "hariangr",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
