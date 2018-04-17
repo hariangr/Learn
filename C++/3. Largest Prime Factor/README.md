@@ -45,7 +45,23 @@ Wait... I can use ternary operator? YEAY!!!
 
 Well I think my definition of prime factors is wrong... since using my definition, the prime factors of 13195 are 2,3,5,7,11,13 which is different from the example given
 
+How about... find the smallest factor THAT IS PRIME, then using recursion, find the next smallest of factor of n divided by previous factor?... Already tried it in calculator... I think it would work
 
+---
+
+well... pointer, reference... it's weird... or at least, I yet to understand it, it took me way too long to find a way to use pointer(or was it reference)... somehow, I think I can solve this problem easier with other language... I think I intendedly make it hard for myself, just because I want to learn about pointer... and reference
+
+---
+
+I'm a bit annoyed by C++ not having hoisting (JavaScript), since I've been coding for JS for quite a while... I'm not sure, was Java have something similiar to Hoisting in JS?
+
+Who care for now... anyway, Finally I finish it...
+
+I made this example on April 17th 2018, the day I suppose to follow the warming up for INVENTION UNUD competition, but I warming up before warming up... simple right... wkwkwk
+
+Why don't they allow C#, Java, Python or JS... the language that I already familiar with...
 
 **type**: Challange
 **source**: https://projecteuler.net/problem=3
+**time**: April 17th 2018, 
+**time spent**: About 2 hours(Minus ten minutes or more) ... damn it took way too long
