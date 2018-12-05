@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -6,6 +7,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    startTimer();
+  }
+
+  startTimer() async {
+    return Timer(Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacementNamed("/animationList");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
