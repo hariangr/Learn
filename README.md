@@ -1,16 +1,20 @@
-# flutter_animations_catalog
+# Learn
+Basicly this repo is just a container for my small project (One time project), boilerplate template that I can copy at any time (Like React Template) or challange that I want to save
 
-A new Flutter project.
+## Android
+My simple android project (of course just the public one)
 
-## Getting Started
+## C
+My C/C++ code, I think I will just put my learning code
 
-This project is a starting point for a Flutter application.
+## Django
+Just for archive, I use Django at around October 2017, but I already move to Node.js since it's really hard to deploy Django, and I think I felt in love with Node.js
 
-A few resources to get you started if this is your first Flutter project:
+## Flutter
+Nothing yet
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+## P5js
+Probably visualization for Letisha (don't worry if you don't get it, but Letisha is my private project)
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## React
+Just template for express api-react frontend since it took me a while to figure out this structure, and this is Microsoft Azure only
