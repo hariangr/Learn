@@ -20,9 +20,11 @@
 int main()
 {
     int max;
-    scanf("%d", &max);
+    // scanf("%d", &max);
     int rightPad;
-    scanf("%d", &rightPad);
+    // scanf("%d", &rightPad);
+    max = 3; // Input di papan
+    rightPad = 3; // Input di papan
 
     for (int row = 1; row <= max; row++)
     {

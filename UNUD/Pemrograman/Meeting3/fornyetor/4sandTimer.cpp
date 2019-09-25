@@ -20,7 +20,7 @@
 
  */
 
-int printStar(int hLength, int startLength)
+void printStar(int hLength, int startLength)
 {
     for (int i = 1; i <= (hLength - startLength) / 2; i++)
     {
@@ -42,9 +42,10 @@ int printStar(int hLength, int startLength)
 
 int main()
 {
-    printf("Masukan bilangan ganjil:\n");
+    // printf("Masukan bilangan ganjil:\n");
     int maxLine;
-    scanf("%d", &maxLine);
+    // scanf("%d", &maxLine);
+    maxLine = 3; // Input di papan
 
     if (maxLine % 2 == 0)
     {
@@ -58,7 +59,7 @@ int main()
         int starCount = 2 * row - 1;
         printStar(hLength, hLength - starCount + 1);
     }
-    for (int row = 2; row <= maxLine - 1; row++)
+    for (int row = 2; row <= maxLine; row++)
     {
         int starCount = 2 * row - 1;
         printStar(hLength, starCount);

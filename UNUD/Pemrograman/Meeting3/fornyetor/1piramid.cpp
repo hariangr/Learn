@@ -35,9 +35,11 @@ void printStar(int hLength, int startLength)
 
 int main()
 {
-    printf("Masukan bilangan ganjil:\n");
+    // printf("Masukan bilangan ganjil:\n");
     int maxLine;
-    scanf("%d", &maxLine);
+    // scanf("%d", &maxLine);
+    
+    maxLine = 3; // Nilai n di papan
 
     if (maxLine % 2 == 0)
     {
