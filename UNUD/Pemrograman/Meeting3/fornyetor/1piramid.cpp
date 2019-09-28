@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 /*
-
         *        
        ***       
       *****      
@@ -11,8 +10,8 @@
   *************  
  *************** 
 *****************
-
 */
+
 void printStar(int hLength, int startLength)
 {
     for (int i = 1; i <= (hLength - startLength) / 2; i++)
@@ -38,7 +37,7 @@ int main()
     // printf("Masukan bilangan ganjil:\n");
     int maxLine;
     // scanf("%d", &maxLine);
-    
+
     maxLine = 3; // Nilai n di papan
 
     if (maxLine % 2 == 0)
