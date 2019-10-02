@@ -1,2 +1,2 @@
-Saved in `ComputerScience/dotMatrixPattern.dart` unfortunately I can't quite implement it using C yet
+Saved in `ComputerScience/PlayingWithAscii/dotMatrixPattern.dart` unfortunately I can't quite implement it using C yet
 I can't even do string manipulation on C yet, so dumb...
