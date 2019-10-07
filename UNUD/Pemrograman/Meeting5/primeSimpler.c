@@ -3,11 +3,11 @@
 int n = 5;
 int main()
 {
-    printf("Masukan angka?\n");
+    printf("Masukkan sebuah bilangan bulat: \n");
     scanf("%d", &n);
 
     int _divisibleBy = 0;
-    for (int i = 1; i <= n; i++)
+    for (int i = 1; i <= n; i = i + 1)
     {
         if (n % i == 0)
         {
@@ -17,11 +17,11 @@ int main()
 
     if (_divisibleBy == 2)
     {
-        printf("Prima\n");
+        printf("%d adalah bilangan prima\n", n);
     }
     else
     {
-        printf("Non\n");
+        printf("%d bukan bilangan prima\n", n);
     }
 
     return 0;

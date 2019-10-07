@@ -9,7 +9,7 @@ void main(List<String> args) async {
   ws.listen((a) {
     print(a);
 
-    ws.add("${DateTime.now()}");
+    // ws.add("${DateTime.now()}");
     // ws.add('{"event": "ping", "payload": "pa"}');
   });
 
@@ -18,7 +18,7 @@ void main(List<String> args) async {
     var x = "hari inisss $z";
     // ws.add(x);
 
-    ws.add('{"event": "ping", "payload": "$z"}');
+    ws.add({"event": "ping", "payload": "$z"});
     print(x);
     z++;
   });
