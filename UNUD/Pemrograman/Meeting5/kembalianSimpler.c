@@ -19,6 +19,7 @@ int main()
             totalHarga = totalHarga + _x;
         }
     }
+    printf("Total harga: %d\n", totalHarga);
 
     // Input uang pembayaran
     printf("Masukkan pembayaran: \n");
