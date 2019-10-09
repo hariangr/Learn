@@ -1,0 +1,24 @@
+
+
+IF LAPER
+    BELI MAKANAN
+
+IF UANG > HARGA BARANG
+    BELI BARANGNYA
+ELSE
+    AMBIL UANG LAGI
+
+if (uang > harga_barang) {
+    printf("Beli barang");
+} else {
+    // ambil uang lagi
+}
+
+
+
+
+//////
+
+VAR N : BILANGAN BULAT;
+JIKA (N % 2 = 0) MAKA N BILANGAN GENAP
+JIKA (N % 2 = 1) MAKA N BILANGAN GANJIL

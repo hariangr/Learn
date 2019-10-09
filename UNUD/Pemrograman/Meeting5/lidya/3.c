@@ -9,6 +9,7 @@ int main()
     {
         printf("nilai yang dimasukkan adalah bilangan ganjil");
     }
+
     if (n % 2 == 0)
     {
         printf("nilai yang dimasukkan adalah bilangan genap");
