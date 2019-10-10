@@ -1,0 +1,18 @@
+S = ALGO
+H = OGLA
+
+S = 
+W = OGLA
+S = W
+
+CREATE(W)
+WHILE(TOP(S) != NULL)
+    W.PUSH(TOP(S))
+    POP(S)
+CREATE(Z)
+WHILE(TOP(W) != NULL)
+    Z.PUSH(TOP(W))
+    POP(W)
+WHILE(TOP(Z) != NULL)
+    S.PUSH(TOP(Z))
+    POP(Z)

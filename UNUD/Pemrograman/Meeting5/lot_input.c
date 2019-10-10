@@ -10,13 +10,13 @@ int main()
         int _x;
         scanf("%d", &_x);
 
-        if (_x == 0)
+        if (_x != 0)
         {
-            break;
+            res = res + _x;
         }
         else
         {
-            res = res + _x;
+            break;
         }
     }
 
