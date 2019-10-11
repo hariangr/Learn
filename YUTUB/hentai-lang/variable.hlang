@@ -1,0 +1,3 @@
+10 VAR nama AS INT
+20 nama = 10
+30 printint(nama)

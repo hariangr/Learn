@@ -1,0 +1,7 @@
+00 MULAI
+10 VAR i TIPE INT
+20 i = 0
+30 PRINTINT(i)
+40 i = i + 1
+50 JIKA (i == 10) KE 30
+60 SELESAI
