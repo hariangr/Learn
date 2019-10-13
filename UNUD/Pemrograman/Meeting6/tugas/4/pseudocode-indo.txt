@@ -1,0 +1,15 @@
+CREATE(S) // Buat stack dengan nama S
+
+CREATE(I) // Buat stack dengan nama I untuk menyimpan bilangan Ganjil
+CREATE(A) // Buat stack dengan nama A untuk menyimpan bilangan Genap
+
+SELAMA(BESAR(S) != 0):
+    if(TOP(S) % 2 == 1){
+        // Ganjil
+        PUSH(I, TOP(S))
+        POP(S)
+    } else {
+        // Genap
+        PUSH(A, TOP(S))
+        POP(S)
+    }

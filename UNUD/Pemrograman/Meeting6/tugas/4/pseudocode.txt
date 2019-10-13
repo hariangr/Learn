@@ -1,0 +1,12 @@
+CREATE(S)
+
+CREATE(I) // Ganjil
+CREATE(A) // Genap
+
+WHILE(NOEL(S) != 0):
+    if(TOP(S) % 2 == 1): // Ganjil
+        PUSH(I, TOP(S))
+        POP(S)
+    else:
+        PUSH(A, TOP(S))
+        POP(S)

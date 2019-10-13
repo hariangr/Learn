@@ -1,0 +1,25 @@
+CREATE(S) // Buat stack bernama S untuk menyimpan input
+
+CREATE(V) // Buat stack bernama V untuk menyimpan vokal
+CREATE(K) // Buat stack bernama K untuk menyimpan konsonan (Selain vokal)
+
+SELAMA(BESAR(S) != 0):
+    STRING huruf = KAPITALISASI(TOP(S))
+    if(huruf == 'A'): // Vokal
+        PUSH(V, TOP(S))
+        POP(S)
+    else if(huruf == 'I'): // Vokal
+        PUSH(V, TOP(S))
+        POP(S)
+    else if(huruf == 'U'): // Vokal
+        PUSH(V, TOP(S))
+        POP(S)
+    else if(huruf == 'E'): // Vokal
+        PUSH(V, TOP(S))
+        POP(S)
+    else if(huruf == 'O'): // Vokal
+        PUSH(V, TOP(S))
+        POP(S)
+    else: // Konsonan
+        PUSH(K, TOP(S))
+        POP(S)

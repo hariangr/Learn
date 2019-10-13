@@ -1,0 +1,17 @@
+int arrA[][] = [[1,2,3], [4,5,6]]
+int arrB[][] = [[7,8], [9,10], [11,12]]
+
+int arrHasil[][] = [[null,null], [null, null]]
+
+FOR baris DARI 0 KE BESAR(arrHasil){
+    FOR kolom DARI 0 KE BESAR(arrHasil.di(baris)){
+        int sementara = 0
+
+        FOR i DARI 0 KE BESAR(arrB) {
+            int semen = arrA.di(baris).di(i) * arrB.di(i).di(kolom)
+            sementara = sementara + semen
+        }
+
+        arrHasil.di(baris).di(kolom) = sementara;
+    }
+}
