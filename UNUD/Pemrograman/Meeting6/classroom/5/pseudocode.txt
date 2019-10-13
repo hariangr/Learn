@@ -6,14 +6,9 @@ CREATE(K) // Konsonan
 WHILE(NOEL(S) != 0):
     STRING _c = str.capitalize(TOP(S))
     BOOL _isVocal = _c == 'A' || _c == 'I' || _c == 'U' || _c == 'E' || _c == 'O'
-    if(_isVocal == true): // Vokal
+    if(_isVocal): // Vokal
         PUSH(V, TOP(S))
         POP(S)
     else:
         PUSH(K, TOP(S))
         POP(S)
-
-[
-    [1,2],
-    [2,3]
-]

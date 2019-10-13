@@ -10,5 +10,3 @@ WHILE(NOEL(S) != 0):
     else:
         PUSH(A, TOP(S))
         POP(S)
-
-//
