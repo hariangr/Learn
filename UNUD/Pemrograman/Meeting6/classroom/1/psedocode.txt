@@ -1,0 +1,7 @@
+int arrA[]
+int arrB[]
+
+int arrH[]
+
+if (len(arrA) != len(arrB)):
+    
