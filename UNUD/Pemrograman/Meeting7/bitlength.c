@@ -1,10 +1,12 @@
 #include <stdio.h>
 
+int counter = 0;
 void recurf(int x)
 {
     if (x == 0)
     {
         printf("0");
+        counter += 1;
     }
     else
     {
@@ -21,6 +23,7 @@ void recurf(int x)
             }
         }
         printf("%d", bin);
+        counter += 1;
     }
 }
 
@@ -31,5 +34,6 @@ int main(int argc, char const *argv[])
     scanf("%d", &i);
 
     recurf(i);
+    printf("\n%d\n", counter);
     return 0;
 }
