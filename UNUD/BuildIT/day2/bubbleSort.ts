@@ -1,10 +1,5 @@
-class BubbleSort {
-    let container: number;
+let container: number[];
 let counter: number;
-
-BubbleSort(arr: number[]) {
-    this.container = Array.from(toSort);
-}
 
 function swap(indexA: number, indexB: number) {
     const temp = container[indexA];
@@ -13,17 +8,16 @@ function swap(indexA: number, indexB: number) {
 }
 
 function oneLoop() {
-    for (let i = 0; i < container.length; i++) {
-        if (container[i] < container[i + 1]) {
-            swap(i, i + 1);
-            counter++;
-        }
-    }
 }
 
 function sort() {
     while (true) {
-        oneLoop();
+        for (let i = 0; i < container.length; i++) {
+            if (container[i] < container[i + 1]) {
+                swap(i, i + 1);
+                counter++;
+            }
+        }
 
         if (counter == 0) {
             return container;
