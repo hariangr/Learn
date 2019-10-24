@@ -6,11 +6,11 @@ void recurf(int input, int cur, int divisibleBy)
     {
         if (divisibleBy == 2)
         {
-            printf("Bilangan prima");
+            printf("Bilangan prima\n");
         }
         else
         {
-            printf("Bukan bilangan prima");
+            printf("Bukan bilangan prima\n");
         }
 
         return;

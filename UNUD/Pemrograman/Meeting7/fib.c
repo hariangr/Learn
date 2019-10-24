@@ -6,7 +6,7 @@ int main(int argc, char const *argv[])
     printf("Masukkan posisi fibonaci yang ingin dicari (1,1,2...):\n");
     scanf("%d", &i);
 
-    int temp[100];
+    int temp[99999];
     temp[0] = 1;
     temp[1] = 1;
 

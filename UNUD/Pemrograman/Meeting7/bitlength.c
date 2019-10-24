@@ -34,6 +34,6 @@ int main(int argc, char const *argv[])
     scanf("%d", &i);
 
     recurf(i);
-    printf("\n%d\n", counter);
+    printf("\nPanjang biner adalah %d\n", counter);
     return 0;
 }
