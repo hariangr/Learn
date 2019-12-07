@@ -1,0 +1,6 @@
+C0001	Romance
+C0002	Comedy
+C0003	Biography
+C0004	Science
+C0005	Fiction
+C0006	Horror

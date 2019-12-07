@@ -1,0 +1,4 @@
+trio	trio	1
+ridho	ridho	1
+hisbi	hisbi	2
+indra	W	1

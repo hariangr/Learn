@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  blogmysql:
+    image: mysql:5.7
+    volumes:
+      - ./blogmysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: KiterchINIuMiNGerLAyFuLtRO
+      MYSQL_DATABASE: blog
+      MYSQL_USER: delucy_access
+      MYSQL_PASSWORD: MoVERicIlytHaStripiMANTANt
+    ports:
+      - 3306:3306
+    networks: 
+      - composer_net
+
+  phpmyadmin:
+    depends_on:
+      - blogmysql
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 1010:80
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: KiterchINIuMiNGerLAyFuLtRO
+      PMA_HOST: blogmysql
+    labels:
+      - traefik.port=80
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:pma.harianugrah.com
+    networks: 
+      - composer_net
+
+networks:
+  composer_net:
