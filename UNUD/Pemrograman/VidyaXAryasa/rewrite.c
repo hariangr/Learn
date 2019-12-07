@@ -3,20 +3,49 @@
 #include <string.h>
 #include <stdbool.h>
 
+// Struct untuk Buku
 struct BukuModel
 {
-    char id[3];
+    char id[3]; // Kenapa 3? :3
     char jenis[50];
     char judul[50];
 };
 
+// Tempat menyimpan daftar buku yang tersedia (Lihat function [loadDummyData])
 struct BukuModel bukuTersedia[5];
 
+// Function untuk membantu menambahkan buku ke daftar [bukuTersedia]
+void tambahBukuTersedia(int _index, char _id[3], char _jenis[50], char _judul[50])
+{
+    struct BukuModel _buku;
+    strcpy(_buku.id, _id);
+    strcpy(_buku.jenis, _jenis);
+    strcpy(_buku.judul, _judul);
+
+    bukuTersedia[_index] = _buku;
+}
+
+// Function untuk mengisi daftar [bukuTersedia]
+void loadDummyData()
+{
+    tambahBukuTersedia(0, "A1", "Pemrograman", "Trick for C++");
+    tambahBukuTersedia(1, "A2", "Sastra Jepang", "Katakana & Kanji 2");
+    tambahBukuTersedia(2, "A3", "Teknologi", "Cisco Networking");
+    tambahBukuTersedia(3, "A4", "Matematika", "Statistika jilid 2");
+    tambahBukuTersedia(4, "A5", "Sains & physics", "Anatomi Tubuh  Manusia");
+}
+
+// Function untuk mengclear screen, karena aku pake Mac dan kau pake Windows
 void clearScreen()
 {
     system("cls||clear");
 }
 
+// Function untuk mencari index buku di [bukuTersedia] jika yang diketahui hanya [id] bukunya saja
+//
+// Misal mencari index untuk buku dengan id A3
+// getIndexByBookId("A3") akan me-return index 2
+// Function ini akan me-return -1 jika id yang diminta ternyata tidak ditemukan
 int getIndexByBookId(char _id[3])
 {
     for (int i = 0; i < 5; i++)
@@ -30,8 +59,16 @@ int getIndexByBookId(char _id[3])
     return -1;
 }
 
+// Function untuk mencari apakah sebuah buku dengan id tertentu ada di daftar [bukuTersedia]
+//
+// Misal mengecek apakah buku dengan id A5 ada
+// cekIdSudahAda("A5") akan me-return true karena ada di daftar buku (Lihat [loadDummyData])
+//
+// Akan me-return false jika id yang dicari tidak ada
+// cekIdSudahAda("C9") akan me-return false
 bool cekIdSudahAda(char _id[3])
 {
+    // Function ini memakai function getIndexByBookId
     int _index = getIndexByBookId(_id);
 
     if (_index == -1)
@@ -42,25 +79,6 @@ bool cekIdSudahAda(char _id[3])
     {
         return true;
     }
-}
-
-void tambahBukuTersedia(int _index, char _id[3], char _jenis[50], char _judul[50])
-{
-    struct BukuModel _buku;
-    strcpy(_buku.id, _id);
-    strcpy(_buku.jenis, _jenis);
-    strcpy(_buku.judul, _judul);
-
-    bukuTersedia[_index] = _buku;
-}
-
-void loadDummyData()
-{
-    tambahBukuTersedia(0, "A1", "Pemrograman", "Trick for C++");
-    tambahBukuTersedia(1, "A2", "Sastra Jepang", "Katakana & Kanji 2");
-    tambahBukuTersedia(2, "A3", "Teknologi", "Cisco Networking");
-    tambahBukuTersedia(3, "A4", "Matematika", "Statistika jilid 2");
-    tambahBukuTersedia(4, "A5", "Sains & physics", "Anatomi Tubuh  Manusia");
 }
 
 void printSemuaBukuTersedia()
@@ -84,6 +102,7 @@ void printSyaratKetentuan()
     printf("----------------------------------------------------------------\n");
 }
 
+// Menu 2
 void menuDaftarMember()
 {
     FILE *in = fopen("data_member.txt", "r");
@@ -113,6 +132,7 @@ void menuDaftarMember()
     }
 }
 
+// Menu 1
 void menuBuatMember()
 {
     printf("========================================\n");
@@ -162,7 +182,8 @@ void menuBuatMember()
     printf("=============================================\n");
 }
 
-menuPinjamBuku()
+// Menu 3
+void menuPinjamBuku()
 {
     printf("===============================================================\n");
     printf("=                                                             =\n");
@@ -183,6 +204,7 @@ menuPinjamBuku()
 
     char nama_penyewa_buku[20];
     printf("Nama Penyewa Buku    : ");
+    fflush(stdin);
     scanf("%[^\n]s", &nama_penyewa_buku);
 
     int jumlah_peminjaman;
@@ -196,16 +218,18 @@ menuPinjamBuku()
         }
     } while ((jumlah_peminjaman > 5) || (jumlah_peminjaman < 1));
 
-char  kode[5][3]
+    char kode[5][3];
+    int jumlah[5]; // Menyimpan jumlah buku per judul buku yang dipinjam
     if ((jumlah_peminjaman <= 5) && (jumlah_peminjaman >= 1))
     {
-        while (i <= jumlah_peminjaman)
+        int i = 0;
+        while (i < jumlah_peminjaman)
         {
             printf("\n=======================================\n");
-            printf("| buku ke-%d \n", i);
+            printf("| buku ke-%d \n", i + 1);
             printf("| Kode Buku                 : ");
             scanf("%s", &kode[i]);
-            if (cek(kode[i]) == true)
+            if (cekIdSudahAda(kode[i]) == true)
             {
                 printf("| Jumlah Buku yang Dipinjam : ");
                 scanf("%d", &jumlah[i]);
@@ -221,6 +245,8 @@ char  kode[5][3]
 
     //input tanggal pinjam
     printf("\nTanggal Pinjam\n");
+
+    int tanggal_pinjam;
     while (1)
     {
         printf("Tanggal [DD]   : ");
@@ -235,6 +261,7 @@ char  kode[5][3]
         }
     }
 
+    int bulan_pinjam;
     while (1)
     {
         printf("Bulan [MM]     : ");
@@ -249,6 +276,7 @@ char  kode[5][3]
         }
     }
 
+    int tahun_pinjam;
     while (1)
     {
         printf("Tahun [YYYY]   : ");
@@ -273,18 +301,114 @@ char  kode[5][3]
     printf("| KODE BUKU |   JENIS BUKU   |     JUDUL BUKU     |  JUMLAH BUKU|\n");
     printf("-----------------------------------------------------------------\n");
 
-    int i = 1;
     if (jumlah_peminjaman > 0)
     {
-        while (i <= jumlah_peminjaman)
+        int i = 0;
+        while (i < jumlah_peminjaman)
         {
             int index = getIndexByBookId(kode[i]);
-            printf(" %s         %s           %s             %d  \n\n", kode[i], jenis[index], judul[index], jumlah[i]);
+            struct BukuModel _buku;
+            _buku = bukuTersedia[index];
+            printf(" %s         %s           %s             %d  \n\n", kode[i], _buku.jenis, _buku.judul, jumlah[i]);
             i++;
         }
     }
     printf("\n\n\n\t\t*****Terima Kasih  %s Atas Kunjungan Anda!***** \n", nama_penyewa_buku);
 }
+
+// Menu 4 (Belum selesai)
+/*
+void menuCekDenda()
+{
+    //input tanggal kembali
+    printf("\nTanggal Kembali\n");
+
+    int tanggal_kembali;
+    while (1)
+    {
+        printf("Tanggal [DD]   : ");
+        fflush(stdin);
+        scanf("%d", &tanggal_kembali);
+        if (tanggal_kembali < 1 || tanggal_kembali > 31)
+        {
+            printf("masukan ulang data..\n");
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    int bulan_kembali;
+    while (1)
+    {
+        printf("Bulan [MM]     : ");
+        scanf("%d", &bulan_kembali);
+        if (bulan_kembali < 1 || bulan_kembali > 12)
+        {
+            printf("masukan ulang data..\n");
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    int tahun_kembali;
+    while (1)
+    {
+        printf("Tahun [YYYY]   : ");
+        scanf("%d", &tahun_kembali);
+        if (tahun_kembali < 2018)
+        {
+            printf("masukan ulang data..\n");
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    clearScreen();
+
+    system("color 0");
+
+    int lama_peminjaman = (tanggal_kembali - tanggal_pinjam) + ((bulan_kembali - bulan_pinjam) * 30) + ((tahun_kembali - tahun_pinjam) * 360);
+    int terlambat = lama_peminjaman - 7;
+
+    int denda = 0;
+    if (lama_peminjaman > 7)
+    {
+        denda = terlambat * 1000;
+    }
+    else if (terlambat <= 7)
+    {
+        terlambat = 0;
+    }
+
+    int tanggal_jt;
+    int bulan_jt;
+    int tahun_jt;
+    tanggal_jt = tanggal_pinjam + 7;
+    bulan_jt = bulan_pinjam + (tanggal_jt / 30);
+    tahun_jt = tahun_pinjam + (bulan_jt / 12);
+    if (tanggal_jt > 30)
+    {
+        tanggal_jt -= 30;
+    }
+    if (bulan_jt > 12)
+    {
+        bulan_jt -= 12;
+    }
+
+    printf("\n Tanggal Pinjam       : %d - %d - %d", tanggal_pinjam, bulan_pinjam, tahun_pinjam);
+    printf("\n Tanggal Kembali      : %d - %d - %d", tanggal_kembali, bulan_kembali, tahun_kembali);
+    printf("\n Tanggal Jatuh tempo  : %d - %d - %d", tanggal_jt, bulan_jt, tahun_jt);
+    printf("\n Lama Peminjaman      : %d hari", lama_peminjaman);
+    printf("\n Lama Keterlambatan   : %d hari", terlambat);
+    printf("\n Denda                : Rp. %d", denda);
+}
+*/
 
 void menuSelection()
 {
@@ -312,6 +436,14 @@ void menuSelection()
     case 2:
         menuDaftarMember();
         break;
+    case 3:
+        menuPinjamBuku();
+        break;
+    case 4:
+        printf("Belum selesai abang");
+        break;
+    case 5:
+        exit(0);
     default:
         break;
     }
@@ -319,7 +451,9 @@ void menuSelection()
 
 int main()
 {
+    // Sebelum melakukan apapun dengan daftar buku, load dulu buku yang tersedia ke [bukuTersedia]
     loadDummyData();
+
     // printSemuaBukuTersedia();
 
     // printSyaratKetentuan();

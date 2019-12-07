@@ -290,7 +290,7 @@ int main (){
 
 
     }if (menu == 5){
-      getch();
+    //   getch();
     }
     //mengulang program
      printf("\n\n--------------------------------\n");
