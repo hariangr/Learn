@@ -3,22 +3,20 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define TOTAL_BUKU_TERSEDIA 5
-
 struct BukuModel
 {
-    char id[2];
+    char id[5];
     char jenis[50];
     char judul[50];
 };
 
-struct BukuModel bukuTersedia[TOTAL_BUKU_TERSEDIA];
+struct BukuModel bukuTersedia[5];
 
-int getIndexByBookId(char _id[2])
+int getIndexByBookId(char _id[5])
 {
-    for (int i = 0; i < TOTAL_BUKU_TERSEDIA; i++)
+    for (int i = 0; i < 5; i++)
     {
-        if (strcmp(_id, bukuTersedia[i].id) == 1)
+        if (strcmp(_id, bukuTersedia[i].id) == 0)
         {
             return i;
         }
@@ -27,18 +25,28 @@ int getIndexByBookId(char _id[2])
     return -1;
 }
 
-bool cekIdSudahAda(char _id[2])
+bool cekIdSudahAda(char _id[5])
 {
+    int _index = getIndexByBookId(_id);
+
+    if (_index == -1)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
-void tambahBukuTersedia(int index, char _id[2], char _jenis[50], char _judul[50])
+void tambahBukuTersedia(int _index, char _id[2], char _jenis[50], char _judul[50])
 {
     struct BukuModel _buku;
     strcpy(_buku.id, _id);
     strcpy(_buku.jenis, _jenis);
     strcpy(_buku.judul, _judul);
 
-    bukuTersedia[index] = _buku;
+    bukuTersedia[_index] = _buku;
 }
 
 void loadDummyData()
@@ -50,7 +58,21 @@ void loadDummyData()
     tambahBukuTersedia(4, "A5", "Sains & physics", "Anatomi Tubuh  Manusia");
 }
 
+void printSemuaBukuTersedia()
+{
+    printf("INDEX\tKODE\tJENIS\tJUDUL\n");
+
+    for (int i = 0; i < 5; i++)
+    {
+        struct BukuModel _buku = bukuTersedia[i];
+        printf("%d \t%s \t%s \t%s \n", i, _buku.id, _buku.jenis, _buku.judul);
+    }
+}
+
 int main()
 {
     loadDummyData();
+    printSemuaBukuTersedia();
+
+    printf("%d\n", getIndexByBookId("A6"));
 }
