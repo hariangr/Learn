@@ -3,6 +3,9 @@
 #include <string.h>
 #include <stdbool.h>
 
+char stringRegister[100];
+int intRegister;
+
 // Struct untuk Buku
 struct BukuModel
 {
@@ -33,16 +36,6 @@ void loadDataBukuTersedia()
     tambahBukuTersedia(2, "A3", "Teknologi", "Cisco Networking");
     tambahBukuTersedia(3, "A4", "Matematika", "Statistika jilid 2");
     tambahBukuTersedia(4, "A5", "Sains & physics", "Anatomi Tubuh  Manusia");
-}
-
-// Function pengganti scanf("%d") karena gak dikasih make scanf di function
-// Sekalian jangan make scanf sama sekali
-int getsInt()
-{
-    char _temp[20];
-    gets(_temp);
-
-    return atoi(_temp);
 }
 
 // Function untuk mengclear screen, karena aku pake Mac dan kau pake Windows
@@ -152,22 +145,26 @@ void menuBuatMember()
     char nama_member[20];
     printf("Nama      : ");
     fflush(stdin);
-    gets(nama_member);
+    main(12, NULL);
+    strcpy(nama_member, stringRegister);
 
     char alamat_member[20];
     printf("\nAlamat    : ");
     fflush(stdin);
-    gets(alamat_member);
+    main(12, NULL);
+    strcpy(alamat_member, stringRegister);
 
     char ttl_member[2][10][4];
     printf("\nTTL       : ");
     fflush(stdin);
-    gets(ttl_member);
+    main(12, NULL);
+    strcpy(ttl_member, stringRegister);
 
     char pekerjaan_member[20];
     printf("\nPekerjaan : ");
     fflush(stdin);
-    gets(pekerjaan_member);
+    main(12, NULL);
+    strcpy(pekerjaan_member, stringRegister);
 
     clearScreen();
 
@@ -216,13 +213,15 @@ void menuPinjamBuku()
     char nama_penyewa_buku[20];
     printf("Nama Penyewa Buku    : ");
     fflush(stdin);
-    gets(nama_penyewa_buku);
+    main(12, NULL);
+    strcpy(nama_penyewa_buku, stringRegister);
 
     int jumlah_peminjaman;
     do
     {
         printf("Jumlah Jenis Buku yang Ingin Dipinjam [max 5]    : ");
-        jumlah_peminjaman = getsInt();
+        main(11, NULL);
+        jumlah_peminjaman = intRegister;
 
         if ((jumlah_peminjaman > 5) || (jumlah_peminjaman < 1))
         {
@@ -240,12 +239,14 @@ void menuPinjamBuku()
             printf("\n=======================================\n");
             printf("| buku ke-%d \n", i + 1);
             printf("| Kode Buku                 : ");
-            gets(kode[i]);
+            main(12, NULL);
+            strcpy(kode[i], stringRegister);
 
             if (cekIdSudahAda(kode[i]) == true)
             {
                 printf("| Jumlah Buku yang Dipinjam : ");
-                jumlah[i] = getsInt();
+                main(11, NULL);
+                jumlah[i] = intRegister;
                 printf("=======================================\n");
                 i++;
             }
@@ -263,7 +264,8 @@ void menuPinjamBuku()
     while (1)
     {
         printf("Tanggal [DD]   : ");
-        tanggal_pinjam = getsInt();
+        main(11, NULL);
+        tanggal_pinjam = intRegister;
 
         if (tanggal_pinjam < 1 || tanggal_pinjam > 31)
         {
@@ -279,7 +281,8 @@ void menuPinjamBuku()
     while (1)
     {
         printf("Bulan [MM]     : ");
-        bulan_pinjam = getsInt();
+        main(11, NULL);
+        bulan_pinjam = intRegister;
 
         if (bulan_pinjam < 1 || bulan_pinjam > 12)
         {
@@ -295,7 +298,8 @@ void menuPinjamBuku()
     while (1)
     {
         printf("Tahun [YYYY]   : ");
-        tahun_pinjam = getsInt();
+        main(11, NULL);
+        tahun_pinjam = intRegister;
 
         if (tahun_pinjam < 2018)
         {
@@ -441,7 +445,8 @@ void menuSelection()
     printf("\n");
     printf("Silahkan masukan nomor menu pilihan anda...\n");
 
-    int menu = getsInt();
+    main(11, NULL);
+    int menu = intRegister;
 
     switch (menu)
     {
@@ -464,14 +469,34 @@ void menuSelection()
     }
 }
 
-int main()
+int main(int argc, char const *argv[])
 {
     // Sebelum melakukan apapun dengan daftar buku, load dulu buku yang tersedia ke [bukuTersedia]
-    loadDataBukuTersedia();
+    if (argc < 3)
+    {
+        loadDataBukuTersedia();
+        menuSelection();
+    }
 
-    // printSemuaBukuTersedia();
+    // Input integer
+    if (argc == 11)
+    {
+        intRegister = NULL;
+        int temp;
+        fflush(stdin);
+        scanf("%d", &temp);
+        intRegister = temp;
+    }
 
-    // printSyaratKetentuan();
+    // Input string
+    if (argc == 12)
+    {
+        memset(stringRegister, 0, sizeof(stringRegister));
+        char temp[100];
+        fflush(stdin);
+        scanf("%[^\n]s", &temp);
+        strcpy(stringRegister, temp);
+    }
 
-    menuSelection();
+    return 0;
 }
