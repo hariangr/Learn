@@ -11,7 +11,7 @@ struct BukuModel
     char judul[50];
 };
 
-// Tempat menyimpan daftar buku yang tersedia (Lihat function [loadDummyData])
+// Tempat menyimpan daftar buku yang tersedia (Lihat function [loadDataBukuTersedia])
 struct BukuModel bukuTersedia[5];
 
 // Function untuk membantu menambahkan buku ke daftar [bukuTersedia]
@@ -26,13 +26,23 @@ void tambahBukuTersedia(int _index, char _id[3], char _jenis[50], char _judul[50
 }
 
 // Function untuk mengisi daftar [bukuTersedia]
-void loadDummyData()
+void loadDataBukuTersedia()
 {
     tambahBukuTersedia(0, "A1", "Pemrograman", "Trick for C++");
     tambahBukuTersedia(1, "A2", "Sastra Jepang", "Katakana & Kanji 2");
     tambahBukuTersedia(2, "A3", "Teknologi", "Cisco Networking");
     tambahBukuTersedia(3, "A4", "Matematika", "Statistika jilid 2");
     tambahBukuTersedia(4, "A5", "Sains & physics", "Anatomi Tubuh  Manusia");
+}
+
+// Function pengganti scanf("%d") karena gak dikasih make scanf di function
+// Sekalian jangan make scanf sama sekali
+int getsInt()
+{
+    char _temp[20];
+    gets(_temp);
+
+    return atoi(_temp);
 }
 
 // Function untuk mengclear screen, karena aku pake Mac dan kau pake Windows
@@ -62,7 +72,7 @@ int getIndexByBookId(char _id[3])
 // Function untuk mencari apakah sebuah buku dengan id tertentu ada di daftar [bukuTersedia]
 //
 // Misal mengecek apakah buku dengan id A5 ada
-// cekIdSudahAda("A5") akan me-return true karena ada di daftar buku (Lihat [loadDummyData])
+// cekIdSudahAda("A5") akan me-return true karena ada di daftar buku (Lihat [loadDataBukuTersedia])
 //
 // Akan me-return false jika id yang dicari tidak ada
 // cekIdSudahAda("C9") akan me-return false
@@ -142,22 +152,23 @@ void menuBuatMember()
     char nama_member[20];
     printf("Nama      : ");
     fflush(stdin);
-    scanf("%[^\n]s", &nama_member);
+    gets(nama_member);
 
     char alamat_member[20];
     printf("\nAlamat    : ");
     fflush(stdin);
-    scanf("%[^\n]s", &alamat_member);
+    gets(alamat_member);
 
     char ttl_member[2][10][4];
     printf("\nTTL       : ");
     fflush(stdin);
-    scanf("%[^\n]s", &ttl_member);
+    gets(ttl_member);
 
     char pekerjaan_member[20];
     printf("\nPekerjaan : ");
     fflush(stdin);
-    scanf("%[^\n]s", &pekerjaan_member);
+    gets(pekerjaan_member);
+
     clearScreen();
 
     FILE *datamember = fopen("data_member.txt", "a");
@@ -205,13 +216,14 @@ void menuPinjamBuku()
     char nama_penyewa_buku[20];
     printf("Nama Penyewa Buku    : ");
     fflush(stdin);
-    scanf("%[^\n]s", &nama_penyewa_buku);
+    gets(nama_penyewa_buku);
 
     int jumlah_peminjaman;
     do
     {
         printf("Jumlah Jenis Buku yang Ingin Dipinjam [max 5]    : ");
-        scanf("%d", &jumlah_peminjaman);
+        jumlah_peminjaman = getsInt();
+
         if ((jumlah_peminjaman > 5) || (jumlah_peminjaman < 1))
         {
             printf("Jumlah jenis buku maximal 5. Silahkan ulangi kembali\n");
@@ -228,11 +240,12 @@ void menuPinjamBuku()
             printf("\n=======================================\n");
             printf("| buku ke-%d \n", i + 1);
             printf("| Kode Buku                 : ");
-            scanf("%s", &kode[i]);
+            gets(kode[i]);
+
             if (cekIdSudahAda(kode[i]) == true)
             {
                 printf("| Jumlah Buku yang Dipinjam : ");
-                scanf("%d", &jumlah[i]);
+                jumlah[i] = getsInt();
                 printf("=======================================\n");
                 i++;
             }
@@ -250,7 +263,8 @@ void menuPinjamBuku()
     while (1)
     {
         printf("Tanggal [DD]   : ");
-        scanf("%d", &tanggal_pinjam);
+        tanggal_pinjam = getsInt();
+
         if (tanggal_pinjam < 1 || tanggal_pinjam > 31)
         {
             printf("masukan ulang data..\n");
@@ -265,7 +279,8 @@ void menuPinjamBuku()
     while (1)
     {
         printf("Bulan [MM]     : ");
-        scanf("%d", &bulan_pinjam);
+        bulan_pinjam = getsInt();
+
         if (bulan_pinjam < 1 || bulan_pinjam > 12)
         {
             printf("masukan ulang data..\n");
@@ -280,7 +295,8 @@ void menuPinjamBuku()
     while (1)
     {
         printf("Tahun [YYYY]   : ");
-        scanf("%d", &tahun_pinjam);
+        tahun_pinjam = getsInt();
+
         if (tahun_pinjam < 2018)
         {
             printf("masukan ulang data..\n");
@@ -328,7 +344,7 @@ void menuCekDenda()
     {
         printf("Tanggal [DD]   : ");
         fflush(stdin);
-        scanf("%d", &tanggal_kembali);
+        tanggalKembali = getsInt();
         if (tanggal_kembali < 1 || tanggal_kembali > 31)
         {
             printf("masukan ulang data..\n");
@@ -343,7 +359,7 @@ void menuCekDenda()
     while (1)
     {
         printf("Bulan [MM]     : ");
-        scanf("%d", &bulan_kembali);
+        bulan_kembali = getsInt();
         if (bulan_kembali < 1 || bulan_kembali > 12)
         {
             printf("masukan ulang data..\n");
@@ -358,7 +374,7 @@ void menuCekDenda()
     while (1)
     {
         printf("Tahun [YYYY]   : ");
-        scanf("%d", &tahun_kembali);
+        tahun_kembali = getsInt();
         if (tahun_kembali < 2018)
         {
             printf("masukan ulang data..\n");
@@ -425,8 +441,7 @@ void menuSelection()
     printf("\n");
     printf("Silahkan masukan nomor menu pilihan anda...\n");
 
-    int menu;
-    scanf("%d", &menu);
+    int menu = getsInt();
 
     switch (menu)
     {
@@ -452,7 +467,7 @@ void menuSelection()
 int main()
 {
     // Sebelum melakukan apapun dengan daftar buku, load dulu buku yang tersedia ke [bukuTersedia]
-    loadDummyData();
+    loadDataBukuTersedia();
 
     // printSemuaBukuTersedia();
 
