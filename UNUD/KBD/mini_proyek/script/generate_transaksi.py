@@ -17,7 +17,7 @@ class GeneratedTableTransaksi:
         self.id_nasabah = _id_nasabah
         self.id_pegawai = _id_pegawai
         self.id_pengepul = _id_pengepul
-        self. tanggal = _tanggal
+        self.tanggal = _tanggal
         self.jenis_transaksi = _jenis_transaksi
         self.berat_total = _berat_total
         self.cash_masuk = _cash_masuk
@@ -55,13 +55,13 @@ def loadPools():
     with open('pool_nasabah.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
         for row in spamreader:
-            pool_nasabah.append(row)
+            pool_nasabah.append(row[0])
 
     # Load pool id pegawai
     with open('pool_pegawai.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
         for row in spamreader:
-            pool_pegawai.append(row)
+            pool_pegawai.append(row[0])
 
     # Load pool id nasabah
     with open('pool_pengepul.csv', newline='') as csvfile:
@@ -85,7 +85,7 @@ def generateOneRandomDetail(_idOffset, _idTransaksi):
     _randomBerat = ran.randrange(1, 10) / 2
 
     _detail = GeneratedTableDetail(
-        _id, _idTransaksi, _randomJenisSampahId, _randomBerat)
+        generateDetailId(_idOffset), _idTransaksi, _randomJenisSampahId, _randomBerat)
 
     return _detail
 
@@ -115,18 +115,18 @@ def generateOneRandomTransaksi(_idOffset, numDetail=1):
 
     _ranJualvBeli = ran.randrange(0, 100) / 100
     if (_ranJualvBeli <= ratioBeliJual):
-        isBeli = 1
+        isBeli = True
     else:
-        isBeli = 0
+        isBeli = False
 
     ranPegawai = ran.randrange(0, len(pool_pegawai))
     ranIdPegawai = pool_pegawai[ranPegawai]
 
     _traksaksi = None
-    if (isBeli == 1):
+    if (isBeli):
         _transaksi = _generateOneRandomTransaksiBeli(
             _idOffset, numDetail, ranIdPegawai)
-    elif(isBeli == 0):
+    else:
         _transaksi = _generateOneRandomTransaksiJual(
             _idOffset, numDetail, ranIdPegawai)
 
@@ -137,12 +137,13 @@ def generateOneRandomTransaksi(_idOffset, numDetail=1):
 #     print(_p.id, _p.hargaJual, _p.hargaBeli)
 
 
-# with open('generated.csv', 'w', newline='') as csvfile:
+# with open('result.csv', 'w', newline='') as csvfile:
 #     wr = csv.writer(csvfile, delimiter='\t',
 #                     quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
 #     for i in range(20):
 #         wr.writerow([i] + ['Spam'] * 8 + [''] + ['s'] * 4)
+
 loadPools()
 
 id_detail_offset = 1
@@ -153,4 +154,6 @@ for id_transaksi_offset in range(1, 50):
 # print(generateOneRandomDetail("DT002", "TR002"))
 # generateOneRandomDetail("DT001", "TR001")
 
-print(generateOneRandomTransaksi(1))
+x = generateOneRandomTransaksi(1)
+print(x)
+print(generateOneRandomDetail(1, x.id))
