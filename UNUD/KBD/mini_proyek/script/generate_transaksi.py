@@ -134,14 +134,14 @@ def _generateOneRandomTransaksiBeli(_idOffset, numDetail, _idPegawai):
     haIm.addTransaksi(_transaksi.id, _transaksi.id_pegawai, _transaksi.id_nasabah, _transaksi.id_pengepul, _transaksi.tanggal,
                       _transaksi.jenis_transaksi, _transaksi.berat_total, _transaksi.cash_masuk, _transaksi.cash_keluar)
     haIm.addDetail(arrDetail[0].id, arrDetail[0].id_transaksi,
-                   arrDetail[0].id_jenis_sampah, arrDetail[0].id_jenis_sampah, arrDetail[0].berat)
+                   arrDetail[0].id_jenis_sampah, arrDetail[0].berat)
 
     if(numDetail > 1):
         for i in range(1, len(arrDetail)):
             csvWriteLn(GeneratedTableTransaksi(
                 '', '', '', '', '', '', '', '', ''), arrDetail[i])
             haIm.addDetail(arrDetail[i].id, arrDetail[i].id_transaksi,
-                           arrDetail[i].id_jenis_sampah, arrDetail[i].id_jenis_sampah, arrDetail[i].berat)
+                           arrDetail[i].id_jenis_sampah, arrDetail[i].berat)
 
     return _transaksi
 
@@ -171,7 +171,7 @@ def _generateOneRandomTransaksiJual(_idOffset, numDetail, _idPegawai):
     haIm.addTransaksi(_transaksi.id, _transaksi.id_pegawai, _transaksi.id_nasabah, _transaksi.id_pengepul, _transaksi.tanggal,
                       _transaksi.jenis_transaksi, _transaksi.berat_total, _transaksi.cash_masuk, _transaksi.cash_masuk)
     haIm.addDetail(arrDetail[0].id, arrDetail[0].id_transaksi,
-                   arrDetail[0].id_jenis_sampah, arrDetail[0].id_jenis_sampah, arrDetail[0].berat)
+                   arrDetail[0].id_jenis_sampah, arrDetail[0].berat)
 
     # Tulis yg pertama semua
     csvWriteLn(_transaksi, arrDetail[0])
@@ -181,7 +181,7 @@ def _generateOneRandomTransaksiJual(_idOffset, numDetail, _idPegawai):
             csvWriteLn(GeneratedTableTransaksi(
                 '', '', '', '', '', '', '', '', ''), arrDetail[i])
             haIm.addDetail(arrDetail[i].id, arrDetail[i].id_transaksi,
-                           arrDetail[i].id_jenis_sampah, arrDetail[i].id_jenis_sampah, arrDetail[i].berat)
+                           arrDetail[i].id_jenis_sampah, arrDetail[i].berat)
 
     return _transaksi
 

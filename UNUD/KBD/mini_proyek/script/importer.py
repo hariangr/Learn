@@ -7,14 +7,15 @@ mydb = mysql.connector.connect(
     user="root",
     port="3306",
     passwd="KiterchINIuMiNGerLAyFuLtRO",
-    database="new_bank_sampah"
+    database="new5_bank_sampah"
 )
 
 
 def addJenisSampah(_id, _nama_sampah, _harga_jual, _harga_beli):
-    print(_id)
     mycursor = mydb.cursor()
-    sql = f"INSERT INTO JENIS_SAMPAH (ID_SAMPAH, NAMA_SAMPAH, HARGA_JUAL_PERKG, HARGA_BELI_PERKG) VALUES ('{_id}', '{_nama_sampah}', '{_harga_jual}', '{_harga_beli}')"
+    sql = f"INSERT INTO JENIS_SAMPAH (ID_JENIS_SAMPAH, NAMA_SAMPAH, HARGA_JUAL_PERKG, HARGA_BELI_PERKG) VALUES ('{_id}', '{_nama_sampah}', '{_harga_jual}', '{_harga_beli}')"
+
+    print(sql)
     mycursor.execute(sql)
 
     mydb.commit()
@@ -23,6 +24,8 @@ def addJenisSampah(_id, _nama_sampah, _harga_jual, _harga_beli):
 def addNasabah(_id, _nama, _alamat):
     mycursor = mydb.cursor()
     sql = f"INSERT INTO NASABAH (ID_NASABAH, NAMA_NASABAH, ALAMAT_NASABAH) VALUES ('{_id}', '{_nama}', '{_alamat}')"
+
+    print(sql)
     mycursor.execute(sql)
 
     mydb.commit()
@@ -30,7 +33,8 @@ def addNasabah(_id, _nama, _alamat):
 
 def addPegawai(_id, _nama, _alamat, _level):
     mycursor = mydb.cursor()
-    sql = f"INSERT INTO PEGAWAI (ID, NAMA, ALAMAT, LEVEL) VALUES ('{_id}', '{_nama}', '{_alamat}', '{_level}')"
+    sql = f"INSERT INTO PEGAWAI (ID_PEGAWAI, NAMA_PEGAWAI, ALAMAT_PEGAWAI, LEVEL_PEGAWAI) VALUES ('{_id}', '{_nama}', '{_alamat}', '{_level}')"
+    print(sql)
     mycursor.execute(sql)
 
     mydb.commit()
@@ -39,21 +43,22 @@ def addPegawai(_id, _nama, _alamat, _level):
 def addPengepul(_id, _nama, _alamat):
     mycursor = mydb.cursor()
     sql = f"INSERT INTO PENGEPUL (ID_PENGEPUL, NAMA_PENGEPUL, ALAMAT_PENGEPUL) VALUES ('{_id}', '{_nama}', '{_alamat}')"
+    print(sql)
     mycursor.execute(sql)
 
     mydb.commit()
 
 
-def addTransaksi(ID_TRANSAKSI, ID, ID_NASABAH, ID_PENGEPUL, TANGGAL, JENIS_TRANSAKSI, BERAT_TOTAL, CASH_MASUK, CASH_KELUAR):
+def addTransaksi(ID_TRANSAKSI, ID_PEGAWAI, ID_NASABAH, ID_PENGEPUL, TANGGAL, JENIS_TRANSAKSI, BERAT_TOTAL, CASH_MASUK, CASH_KELUAR):
     # CASH_MASUK =  int(_CASH_MASUK)
     # CASH_KELUAR = int(_CASH_KELUAR)
 
     mycursor = mydb.cursor()
     sql = None
     if(JENIS_TRANSAKSI == "BELI"):
-        sql = f"INSERT INTO TRANSAKSI (ID_TRANSAKSI, ID, ID_NASABAH , TANGGAL , JENIS_TRANSAKSI, BERAT_TOTAL, CASH_KELUAR) VALUES  ('{ID_TRANSAKSI}', '{ID}', '{ID_NASABAH}', '{TANGGAL}', '{JENIS_TRANSAKSI}', '{BERAT_TOTAL}', '{CASH_KELUAR}')"
+        sql = f"INSERT INTO TRANSAKSI (ID_TRANSAKSI, ID_PEGAWAI, ID_NASABAH , TANGGAL , JENIS_TRANSAKSI, BERAT_TOTAL, CASH_KELUAR) VALUES  ('{ID_TRANSAKSI}', '{ID_PEGAWAI}', '{ID_NASABAH}', '{TANGGAL}', '{JENIS_TRANSAKSI}', '{BERAT_TOTAL}', '{CASH_KELUAR}')"
     else:
-        sql = f"INSERT INTO TRANSAKSI (ID_TRANSAKSI, ID, ID_PENGEPUL , TANGGAL , JENIS_TRANSAKSI, BERAT_TOTAL , CASH_MASUK) VALUES  ('{ID_TRANSAKSI}', '{ID}', '{ID_PENGEPUL}', '{TANGGAL}', '{JENIS_TRANSAKSI}', '{BERAT_TOTAL}', '{CASH_MASUK}')"
+        sql = f"INSERT INTO TRANSAKSI (ID_TRANSAKSI, ID_PEGAWAI, ID_PENGEPUL , TANGGAL , JENIS_TRANSAKSI, BERAT_TOTAL , CASH_MASUK) VALUES  ('{ID_TRANSAKSI}', '{ID_PEGAWAI}', '{ID_PENGEPUL}', '{TANGGAL}', '{JENIS_TRANSAKSI}', '{BERAT_TOTAL}', '{CASH_MASUK}')"
 
     print(sql)
     mycursor.execute(sql)
@@ -61,9 +66,10 @@ def addTransaksi(ID_TRANSAKSI, ID, ID_NASABAH, ID_PENGEPUL, TANGGAL, JENIS_TRANS
     mydb.commit()
 
 
-def addDetail(	ID_DETAIL_TRANSAKSI	, ID_TRANSAKSI	, ID_SAMPAH,	ID_JENIS_SAMPAH,	BERAT):
+def addDetail(	ID_DETAIL_TRANSAKSI	, ID_TRANSAKSI,	ID_JENIS_SAMPAH,	BERAT):
     mycursor = mydb.cursor()
-    sql = f"INSERT INTO DETAIL_TRANSAKSI ( ID_DETAIL_TRANSAKSI, ID_TRANSAKSI, ID_SAMPAH, ID_JENIS_SAMPAH, BERAT) VALUES ('{ID_DETAIL_TRANSAKSI}', '{ID_TRANSAKSI}', '{ID_SAMPAH}', '{ID_JENIS_SAMPAH}', '{BERAT}')"
+    sql = f"INSERT INTO DETAIL_TRANSAKSI ( ID_DETAIL_TRANSAKSI, ID_TRANSAKSI, ID_JENIS_SAMPAH, BERAT) VALUES ('{ID_DETAIL_TRANSAKSI}', '{ID_TRANSAKSI}', '{ID_JENIS_SAMPAH}', '{BERAT}')"
+    print(sql)
     mycursor.execute(sql)
 
     mydb.commit()
