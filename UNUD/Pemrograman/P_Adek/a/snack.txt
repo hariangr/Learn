@@ -1,0 +1,5 @@
+Sendiri: 1 regular popcorn + 1 regular lemon tea#23000
+Berdua(an): 2 regular popcorn + 2 regular lemon tea#36000
+Berempat: 4 regular popcorn + 4 regular lemon tea#82000
+Rame-Rame: 2 large popcorn + 3 large lemon tea#120000
+Rombongan: 3 large popcorn + 5 large lemon tea#220000
