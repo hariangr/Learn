@@ -7,8 +7,9 @@ mydb = mysql.connector.connect(
     user="root",
     port="3306",
     passwd="KiterchINIuMiNGerLAyFuLtRO",
-    database="new5_bank_sampah"
+    database="new8_bank_sampah"
 )
+
 
 
 def addJenisSampah(_id, _nama_sampah, _harga_jual, _harga_beli):
