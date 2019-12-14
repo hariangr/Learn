@@ -1,0 +1,4 @@
+nama F 18
+yang F 12
+akan M 1
+dibaca M 99
