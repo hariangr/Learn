@@ -13,6 +13,8 @@ struct Orang
     char jenis_kelamin;
 };
 
+struct Orang arrayOrang[100];
+
 void printDetilOrang(struct Orang o) {
     printf("Nama adalah: %s\n", o.nama);
     printf("Umur adalah: %d\n", o.umur);
@@ -31,7 +33,10 @@ int main()
     dwi.umur = -1;
     dwi.jenis_kelamin = 'F';
 
-    printDetilOrang(kusuma);
+    arrayOrang[0] = kusuma;
+    arrayOrang[1] = dwi;
+
+    printDetilOrang(arrayOrang[0]);
     printf("\n");
-    printDetilOrang(dwi);
+    printDetilOrang(arrayOrang[1]);
 }

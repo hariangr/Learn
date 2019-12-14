@@ -15,13 +15,7 @@ int main()
     // Cara memasukkan nilai string ke sebuah char array
 
     // Cara 1, cara memasukkan item ke array biasa (Ribet)
-    char nama1[100] = { 'K',
-                        'u',
-                        's',
-                        'u',
-                        'm',
-                        'a'
-    };
+    char nama1[100] = { 'K', 'u', 's','u','m','a'};
 
     // %s untuk print string
     printf("%s\n", nama1);
