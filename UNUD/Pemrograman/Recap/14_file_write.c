@@ -12,6 +12,9 @@ void tulisInfoOrangKeFile(char nama[100], char jenis_kelamin, int umur)
 
     // fprintf itu mirip kayak printf, cuma disimpen ke file bukan ke layar
     fprintf(writer, "%s;%c;%d\n", nama, jenis_kelamin, umur);
+
+    // tutup filenya
+    fclose(writer);
 }
 
 int main()
