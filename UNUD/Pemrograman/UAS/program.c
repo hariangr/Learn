@@ -204,22 +204,18 @@ void menuSelection()
     case 1:
         hMenuOneShowAll();
         break;
-
     case 2:
         hMenuTwoImport();
         break;
-
     case 3:
         hMenuThreeExportMale();
         break;
     case 4:
         hMenuFourExportFemale();
         break;
-
     case 5:
         hMenuFiveGP3();
         break;
-
     default:
         break;
     }

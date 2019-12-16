@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  blogmysql:
+    image: mysql:5.7
+    volumes:
+      - ./blogmysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: blog
+      MYSQL_USER: delucy_access
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - 1102:3306
+
+  phpmyadmin:
+    depends_on:
+      - blogmysql
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 1101:80
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      PMA_HOST: blogmysql

@@ -3,14 +3,8 @@ import random as ran
 import importer as haIm
 import datetime as datetime
 
-ratioBeliJual = 0.8
-idDtOffset = 1
-
-
-def incrementDtOffset():
-    global idDtOffset
-
-    idDtOffset = idDtOffset + 1
+idDtOffsetPembelian = 1
+idDtOffsetPengepulan = 1
 
 
 class JenisSampah:
@@ -107,6 +101,8 @@ def getJenisSampahById(_id):
 
 
 def _generateOneRandomTransaksiBeli(_idOffset, numDetail, _idPegawai):
+    global idDtOffsetPembelian
+
     _trId = generateTransaksiId(_idOffset)
     ranNasabah = ran.randrange(0, len(pool_nasabah))
     ranIdNasabah = pool_nasabah[ranNasabah]
@@ -117,12 +113,13 @@ def _generateOneRandomTransaksiBeli(_idOffset, numDetail, _idPegawai):
     _cashOut = 0
 
     for _ in range(numDetail):
-        _detail = generateOneRandomDetail(idDtOffset, _trId)
+        print("Detail no:", idDtOffsetPembelian)
+        _detail = generateOneRandomDetail(idDtOffsetPembelian, _trId)
         arrDetail.append(_detail)
         _beratTotal += _detail.berat
         _cashOut = _cashOut + \
             getJenisSampahById(_detail.id_jenis_sampah).hargaBeli
-        incrementDtOffset()
+        idDtOffsetPembelian += 1
 
     print(_cashOut)
 
@@ -131,22 +128,24 @@ def _generateOneRandomTransaksiBeli(_idOffset, numDetail, _idPegawai):
 
     # Tulis yg pertama semua
     csvWriteLn(_transaksi, arrDetail[0])
-    haIm.addTransaksi(_transaksi.id, _transaksi.id_pegawai, _transaksi.id_nasabah, _transaksi.id_pengepul, _transaksi.tanggal,
-                      _transaksi.jenis_transaksi, _transaksi.berat_total, _transaksi.cash_masuk, _transaksi.cash_keluar)
-    haIm.addDetail(arrDetail[0].id, arrDetail[0].id_transaksi,
-                   arrDetail[0].id_jenis_sampah, arrDetail[0].berat)
+    haIm.addTransaksiPembelian(_transaksi.id, _transaksi.id_pegawai, _transaksi.id_nasabah,
+                               _transaksi.tanggal, _transaksi.berat_total, _transaksi.cash_keluar)
+    haIm.addDetailPembelian(arrDetail[0].id, arrDetail[0].id_transaksi,
+                            arrDetail[0].id_jenis_sampah, arrDetail[0].berat)
 
     if(numDetail > 1):
         for i in range(1, len(arrDetail)):
             csvWriteLn(GeneratedTableTransaksi(
                 '', '', '', '', '', '', '', '', ''), arrDetail[i])
-            haIm.addDetail(arrDetail[i].id, arrDetail[i].id_transaksi,
-                           arrDetail[i].id_jenis_sampah, arrDetail[i].berat)
+            haIm.addDetailPembelian(arrDetail[i].id, arrDetail[i].id_transaksi,
+                                    arrDetail[i].id_jenis_sampah, arrDetail[i].berat)
 
     return _transaksi
 
 
 def _generateOneRandomTransaksiJual(_idOffset, numDetail, _idPegawai):
+    global idDtOffsetPengepulan
+
     _trId = generateTransaksiId(_idOffset)
 
     ranPengepul = ran.randrange(0, len(pool_pengepul))
@@ -158,20 +157,21 @@ def _generateOneRandomTransaksiJual(_idOffset, numDetail, _idPegawai):
     _cashIn = 0
 
     for _ in range(numDetail):
-        _detail = generateOneRandomDetail(idDtOffset, _trId)
+        print("xxx__")
+        _detail = generateOneRandomDetail(idDtOffsetPengepulan, _trId)
         arrDetail.append(_detail)
         _beratTotal += _detail.berat
         _cashIn = _cashIn + \
             getJenisSampahById(_detail.id_jenis_sampah).hargaJual
-        incrementDtOffset()
+        idDtOffsetPengepulan += 1
 
     _transaksi = GeneratedTableTransaksi(generateTransaksiId(
         _idOffset), '', _idPegawai, ranIdPengepul, datetime.datetime(2019, 11, 12), 'JUAL', _beratTotal, _cashIn, '')
 
-    haIm.addTransaksi(_transaksi.id, _transaksi.id_pegawai, _transaksi.id_nasabah, _transaksi.id_pengepul, _transaksi.tanggal,
-                      _transaksi.jenis_transaksi, _transaksi.berat_total, _transaksi.cash_masuk, _transaksi.cash_masuk)
-    haIm.addDetail(arrDetail[0].id, arrDetail[0].id_transaksi,
-                   arrDetail[0].id_jenis_sampah, arrDetail[0].berat)
+    haIm.addTransaksiPengepulan(_transaksi.id, _transaksi.id_pegawai, _transaksi.id_pengepul, _transaksi.tanggal,
+                                _transaksi.berat_total, _transaksi.cash_masuk)
+    haIm.addDetailPengepulan(arrDetail[0].id, arrDetail[0].id_transaksi,
+                             arrDetail[0].id_jenis_sampah, arrDetail[0].berat)
 
     # Tulis yg pertama semua
     csvWriteLn(_transaksi, arrDetail[0])
@@ -180,39 +180,10 @@ def _generateOneRandomTransaksiJual(_idOffset, numDetail, _idPegawai):
         for i in range(1, len(arrDetail)):
             csvWriteLn(GeneratedTableTransaksi(
                 '', '', '', '', '', '', '', '', ''), arrDetail[i])
-            haIm.addDetail(arrDetail[i].id, arrDetail[i].id_transaksi,
-                           arrDetail[i].id_jenis_sampah, arrDetail[i].berat)
+            haIm.addDetailPengepulan(arrDetail[i].id, arrDetail[i].id_transaksi,
+                                     arrDetail[i].id_jenis_sampah, arrDetail[i].berat)
 
     return _transaksi
-
-
-def generateOneRandomTransaksi(_idOffset):
-    isBeli = None
-
-    _ranJualvBeli = ran.randrange(0, 100) / 100
-    if (_ranJualvBeli <= ratioBeliJual):
-        isBeli = True
-    else:
-        isBeli = False
-
-    ranPegawai = ran.randrange(0, len(pool_pegawai))
-    ranIdPegawai = pool_pegawai[ranPegawai]
-
-    _traksaksi = None
-    if (isBeli):
-        ranNumDetail = ran.randrange(1, 5)
-
-        _transaksi = _generateOneRandomTransaksiBeli(
-            _idOffset, ranNumDetail, ranIdPegawai,)
-    else:
-        _transaksi = _generateOneRandomTransaksiJual(
-            _idOffset, 1, ranIdPegawai)
-
-    return _transaksi
-
-
-# for _p in pool_jenis_sampah:
-#     print(_p.id, _p.hargaJual, _p.hargaBeli)
 
 
 def csvWriteLn(tr, dt):
@@ -221,23 +192,24 @@ def csvWriteLn(tr, dt):
                         quotechar='|', quoting=csv.QUOTE_MINIMAL)
         wr.writerow([tr.id] + [tr.id_nasabah]+[tr.id_pegawai]+[tr.id_pengepul]+[tr.tanggal]+[tr.jenis_transaksi] +
                     [tr.berat_total]+[tr.cash_masuk]+[tr.cash_keluar]+[''] + [dt.id]+[dt.id_transaksi]+[dt.id_jenis_sampah]+[dt.berat])
-        # for i in range(20):
-        #     wr.writerow([i] + ['Spam'] * 8 + [''] + ['s'] * 4)
-
-
-_trOffset = 0
-
-
-def generate():
-    global _trOffset
-
-    _trOffset += 1
-
-    _transaksi = generateOneRandomTransaksi(_trOffset)
-    _detail = generateOneRandomDetail(_trOffset, _transaksi.id)
 
 
 loadPools()
 
-for _ in range(50):
-    generate()
+haIm.insertJenisSampah()
+haIm.insertNasabah()
+haIm.insertPegawai()
+haIm.insertPengepul()
+
+for i in range(1, 101):
+    ranPegawai = ran.randrange(0, len(pool_pegawai))
+    ranIdPegawai = pool_pegawai[ranPegawai]
+
+    # Transaksi Beli
+    ranNumDetail = ran.randrange(1, 5)
+    _generateOneRandomTransaksiBeli(
+        i, ranNumDetail, ranIdPegawai,)
+
+    # Transaksi Jual
+    _generateOneRandomTransaksiJual(
+        i, 1, ranIdPegawai)

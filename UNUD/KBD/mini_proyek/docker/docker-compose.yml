@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  mysqlserver:
+    image: mysql:5.7
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: kbd
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - 1201:3306
+
+  phpmyadmin:
+    depends_on:
+      - mysqlserver
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 1202:80
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      PMA_HOST: mysqlserver

@@ -5,16 +5,15 @@ from datetime import datetime
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    port="3306",
-    passwd="KiterchINIuMiNGerLAyFuLtRO",
-    database="new8_bank_sampah"
+    port="1201",
+    passwd="rootpassword",
+    database="bank_sampah15"
 )
-
 
 
 def addJenisSampah(_id, _nama_sampah, _harga_jual, _harga_beli):
     mycursor = mydb.cursor()
-    sql = f"INSERT INTO JENIS_SAMPAH (ID_JENIS_SAMPAH, NAMA_SAMPAH, HARGA_JUAL_PERKG, HARGA_BELI_PERKG) VALUES ('{_id}', '{_nama_sampah}', '{_harga_jual}', '{_harga_beli}')"
+    sql = f"INSERT INTO tb_jenis_sampah (id_jenis_sampah, nama_sampah, harga_jual_perkg, harga_beli_perkg) VALUES ('{_id}', '{_nama_sampah}', '{_harga_jual}', '{_harga_beli}')"
 
     print(sql)
     mycursor.execute(sql)
@@ -24,7 +23,7 @@ def addJenisSampah(_id, _nama_sampah, _harga_jual, _harga_beli):
 
 def addNasabah(_id, _nama, _alamat):
     mycursor = mydb.cursor()
-    sql = f"INSERT INTO NASABAH (ID_NASABAH, NAMA_NASABAH, ALAMAT_NASABAH) VALUES ('{_id}', '{_nama}', '{_alamat}')"
+    sql = f"INSERT INTO tb_nasabah (id_nasabah, nama_nasabah, alamat_nasabah) VALUES ('{_id}', '{_nama}', '{_alamat}')"
 
     print(sql)
     mycursor.execute(sql)
@@ -34,7 +33,7 @@ def addNasabah(_id, _nama, _alamat):
 
 def addPegawai(_id, _nama, _alamat, _level):
     mycursor = mydb.cursor()
-    sql = f"INSERT INTO PEGAWAI (ID_PEGAWAI, NAMA_PEGAWAI, ALAMAT_PEGAWAI, LEVEL_PEGAWAI) VALUES ('{_id}', '{_nama}', '{_alamat}', '{_level}')"
+    sql = f"INSERT INTO tb_pegawai (id_pegawai, nama_pegawai, alamat_pegawai, level_pegawai) VALUES ('{_id}', '{_nama}', '{_alamat}', '{_level}')"
     print(sql)
     mycursor.execute(sql)
 
@@ -43,23 +42,16 @@ def addPegawai(_id, _nama, _alamat, _level):
 
 def addPengepul(_id, _nama, _alamat):
     mycursor = mydb.cursor()
-    sql = f"INSERT INTO PENGEPUL (ID_PENGEPUL, NAMA_PENGEPUL, ALAMAT_PENGEPUL) VALUES ('{_id}', '{_nama}', '{_alamat}')"
+    sql = f"INSERT INTO tb_pengepul (id_pengepul, nama_pengepul, alamat_pengepul) VALUES ('{_id}', '{_nama}', '{_alamat}')"
     print(sql)
     mycursor.execute(sql)
 
     mydb.commit()
 
 
-def addTransaksi(ID_TRANSAKSI, ID_PEGAWAI, ID_NASABAH, ID_PENGEPUL, TANGGAL, JENIS_TRANSAKSI, BERAT_TOTAL, CASH_MASUK, CASH_KELUAR):
-    # CASH_MASUK =  int(_CASH_MASUK)
-    # CASH_KELUAR = int(_CASH_KELUAR)
-
+def addTransaksiPembelian(ID_TRANSAKSI, ID_PEGAWAI, ID_NASABAH, TANGGAL, BERAT_TOTAL, CASH_KELUAR):
     mycursor = mydb.cursor()
-    sql = None
-    if(JENIS_TRANSAKSI == "BELI"):
-        sql = f"INSERT INTO TRANSAKSI (ID_TRANSAKSI, ID_PEGAWAI, ID_NASABAH , TANGGAL , JENIS_TRANSAKSI, BERAT_TOTAL, CASH_KELUAR) VALUES  ('{ID_TRANSAKSI}', '{ID_PEGAWAI}', '{ID_NASABAH}', '{TANGGAL}', '{JENIS_TRANSAKSI}', '{BERAT_TOTAL}', '{CASH_KELUAR}')"
-    else:
-        sql = f"INSERT INTO TRANSAKSI (ID_TRANSAKSI, ID_PEGAWAI, ID_PENGEPUL , TANGGAL , JENIS_TRANSAKSI, BERAT_TOTAL , CASH_MASUK) VALUES  ('{ID_TRANSAKSI}', '{ID_PEGAWAI}', '{ID_PENGEPUL}', '{TANGGAL}', '{JENIS_TRANSAKSI}', '{BERAT_TOTAL}', '{CASH_MASUK}')"
+    sql = f"INSERT INTO tb_transaksi_pembelian (id_transaksi_pembelian, id_pegawai, id_nasabah , tgl_transaksi, berat_total, cash_keluar) VALUES  ('{ID_TRANSAKSI}', '{ID_PEGAWAI}', '{ID_NASABAH}', '{TANGGAL}', '{BERAT_TOTAL}', '{CASH_KELUAR}')"
 
     print(sql)
     mycursor.execute(sql)
@@ -67,17 +59,51 @@ def addTransaksi(ID_TRANSAKSI, ID_PEGAWAI, ID_NASABAH, ID_PENGEPUL, TANGGAL, JEN
     mydb.commit()
 
 
-def addDetail(	ID_DETAIL_TRANSAKSI	, ID_TRANSAKSI,	ID_JENIS_SAMPAH,	BERAT):
+def addDetailPembelian(	ID_DETAIL_TRANSAKSI	, ID_TRANSAKSI,	ID_JENIS_SAMPAH,	BERAT):
     mycursor = mydb.cursor()
-    sql = f"INSERT INTO DETAIL_TRANSAKSI ( ID_DETAIL_TRANSAKSI, ID_TRANSAKSI, ID_JENIS_SAMPAH, BERAT) VALUES ('{ID_DETAIL_TRANSAKSI}', '{ID_TRANSAKSI}', '{ID_JENIS_SAMPAH}', '{BERAT}')"
+    sql = f"INSERT INTO tb_detail_transaksi_pembelian ( id_detail_transaksi_pembelian, id_transaksi_pembelian, id_jenis_sampah, berat) VALUES ('{ID_DETAIL_TRANSAKSI}', '{ID_TRANSAKSI}', '{ID_JENIS_SAMPAH}', '{BERAT}')"
     print(sql)
     mycursor.execute(sql)
 
     mydb.commit()
 
 
-def sanitize(s):
-    pass
+def addTransaksiPengepulan(ID_TRANSAKSI, ID_PEGAWAI, ID_PENGEPUL, TANGGAL, BERAT_TOTAL, CASH_MASUK):
+    mycursor = mydb.cursor()
+    sql = f"INSERT INTO tb_transaksi_pengepulan (id_transaksi_pengepulan, id_pegawai, id_pengepul , tgl_transaksi, berat_total, cash_masuk) VALUES  ('{ID_TRANSAKSI}', '{ID_PEGAWAI}', '{ID_PENGEPUL}', '{TANGGAL}', '{BERAT_TOTAL}', '{CASH_MASUK}')"
+
+    print(sql)
+    mycursor.execute(sql)
+
+    mydb.commit()
+
+
+def addDetailPengepulan(	ID_DETAIL_TRANSAKSI	, ID_TRANSAKSI,	ID_JENIS_SAMPAH,	BERAT):
+    mycursor = mydb.cursor()
+    sql = f"INSERT INTO tb_detail_transaksi_pengepulan ( id_detail_transaksi_pengepulan, id_transaksi_pengepulan, id_jenis_sampah, berat) VALUES ('{ID_DETAIL_TRANSAKSI}', '{ID_TRANSAKSI}', '{ID_JENIS_SAMPAH}', '{BERAT}')"
+    print(sql)
+    mycursor.execute(sql)
+
+    mydb.commit()
+
+
+# def addTransaksiPengepulan(ID_TRANSAKSI, ID_PEGAWAI, ID_NASABAH, ID_PENGEPUL, TANGGAL, JENIS_TRANSAKSI, BERAT_TOTAL, CASH_MASUK, CASH_KELUAR):
+#     mycursor = mydb.cursor()
+#     sql = f"INSERT INTO TRANSAKSI (ID_TRANSAKSI, ID_PEGAWAI, ID_PENGEPUL , TANGGAL , JENIS_TRANSAKSI, BERAT_TOTAL , CASH_MASUK) VALUES  ('{ID_TRANSAKSI}', '{ID_PEGAWAI}', '{ID_PENGEPUL}', '{TANGGAL}', '{JENIS_TRANSAKSI}', '{BERAT_TOTAL}', '{CASH_MASUK}')"
+
+#     print(sql)
+#     mycursor.execute(sql)
+
+#     mydb.commit()
+
+
+# def addDetailPengepulan(	ID_DETAIL_TRANSAKSI	, ID_TRANSAKSI,	ID_JENIS_SAMPAH,	BERAT):
+#     mycursor = mydb.cursor()
+#     sql = f"INSERT INTO DETAIL_TRANSAKSI ( ID_DETAIL_TRANSAKSI, ID_TRANSAKSI, ID_JENIS_SAMPAH, BERAT) VALUES ('{ID_DETAIL_TRANSAKSI}', '{ID_TRANSAKSI}', '{ID_JENIS_SAMPAH}', '{BERAT}')"
+#     print(sql)
+#     mycursor.execute(sql)
+
+#     mydb.commit()
 
 
 def insertJenisSampah():
@@ -113,11 +139,3 @@ def insertPengepul():
         for row in spamreader:
             addPengepul(row[0], row[1], row[2])
 
-
-insertJenisSampah()
-insertNasabah()
-insertPegawai()
-insertPengepul()
-
-# addTransaksi("TR001", "PG002", "NB036", None,
-#              "19-19-2000", "BELI", 3.0, None, 3000)
