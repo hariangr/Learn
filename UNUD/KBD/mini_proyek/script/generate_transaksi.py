@@ -5,6 +5,7 @@ import datetime as datetime
 
 idDtOffsetPembelian = 1
 idDtOffsetPengepulan = 1
+dateTrOffset = datetime.date(2018, 8, 13)
 
 
 class JenisSampah:
@@ -40,6 +41,9 @@ class GeneratedTableDetail:
     def __str__(self):
         return f'id\t\tid_transaksi\tid_jenis_sampah\t\tberat\n' + f'{self.id}\t\t{self.id_transaksi}\t\t{self.id_jenis_sampah}\t\t\t{self.berat}'
 
+
+def generateAdvancingDate():
+    
 
 pool_jenis_sampah = []
 pool_nasabah = []
