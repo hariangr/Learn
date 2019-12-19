@@ -1,4 +1,4 @@
-// Tambahkan menu mencari nilai rata-rata G1, G2, G3
+// Tambahkan menu menambah data manual
 
 #include <stdio.h>
 #include <stdlib.h>
