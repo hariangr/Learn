@@ -5,6 +5,7 @@
         "stdbool.h": "c",
         "stdlib.h": "c",
         "limits.h": "c",
-        "locale": "c"
+        "locale": "c",
+        "9.C": "cpp"
     }
 }
