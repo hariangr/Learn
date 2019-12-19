@@ -262,7 +262,7 @@ void menu5PrintSorted()
     }
 }
 
-void menu7TulisMaster()
+void menu6TulisMaster()
 {
     FILE *penulis;
     penulis = fopen("master.txt", "w");
@@ -291,8 +291,8 @@ void pilihanMenu()
     printf("> 3. Export data laki-laki\n");
     printf("> 4. Export data perempuan\n");
     printf("> 5. Tampilkan 20 data GP3\n");
-    printf("> 6. Keluar\n");
-    printf("> 7. Perbarui file master.txt\n");
+    printf("> 6. Perbarui file master.txt\n");
+    printf("> 7. Keluar\n");
     printf(">> Pilih menu? ");
 
     int menu;
@@ -316,10 +316,10 @@ void pilihanMenu()
         menu5PrintSorted();
         break;
     case 6:
-        exit(0);
+        menu6TulisMaster();
         break;
     case 7:
-        menu7TulisMaster();
+        exit(0);
         break;
     default:
         printf("Error\n");
