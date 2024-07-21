@@ -7,10 +7,5 @@
         "limits.h": "c",
         "locale": "c",
         "9.C": "cpp"
-    },
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#3B2B11",
-        "titleBar.activeBackground": "#533C17",
-        "titleBar.activeForeground": "#FCFAF6"
     }
 }
